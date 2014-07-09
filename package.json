@@ -1,0 +1,19 @@
+{
+  "name": "moar-input",
+  "version": "0.0.0",
+  "description": "A web front-end for Johnny-Five components",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "gulp tests"
+  },
+  "keywords": [
+    "johnny-five"
+  ],
+  "author": "Brian Genisio",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "gulp-traceur": "^0.8.0",
+    "gulp-jshint": "^1.7.0"
+  }
+}
