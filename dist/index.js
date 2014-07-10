@@ -1,8 +1,12 @@
 "use strict";
+require('traceur');
+var pBoard = Symbol();
 var MoarInput = function MoarInput(board) {
-  this.board = board;
+  this[pBoard] = board;
 };
-($traceurRuntime.createClass)(MoarInput, {}, {});
+($traceurRuntime.createClass)(MoarInput, {get board() {
+    return this[pBoard];
+  }}, {});
 module.exports = MoarInput;
 
 //# sourceMappingURL=index.js.map

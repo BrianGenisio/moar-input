@@ -13,34 +13,24 @@ var jsHintConfig = {
 	esnext: true
 };
 
-gulp.task('transpile', function() {
-	return gulp.src(paths.source)
+gulp.task('js', function() {
+    return gulp.src(paths.source)
+        .pipe(jshint(jsHintConfig))
+        .pipe(jshint.reporter('default'))
         .pipe(traceur({sourceMap: true}))
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('lint', function() {
-  return gulp.src(paths.source.concat(paths.test))
-    .pipe(jshint(jsHintConfig))
-    .pipe(jshint.reporter('default'));
-});
-
-gulp.task('build', function() {
-	gulp.start('lint', 'transpile');
-});
-
-gulp.task('test', ['build'], function () {
-    gulp.src(paths.test)
-        .pipe(nodeunit({
-            reporter: 'junit',
-            reporterOptions: {
-                output: 'test'
-            }
-        }));
+gulp.task('test', ['js'], function () {
+    return gulp.src(paths.test)
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(nodeunit())
+        .on('error', function() {});
 });
 
 gulp.task('watch', function() {
-	gulp.watch(paths.source, ['build']);
+	gulp.watch(paths.source.concat(paths.test), ['test']);
 });
 
 gulp.task('default', function() {
