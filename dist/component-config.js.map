@@ -1,0 +1,1 @@
+{"version":3,"file":"component-config.js","sources":["component-config.js"],"names":[],"mappings":"AAAA;AAAA,CAAA,KAAM,QAAQ,EAAG,EAChB,KAAK,CAAE,EACN,UAAU,CAAE,EAAC,IAAI,CAAE,MAAK,CAAE,QAAO,CAAC,CAClC,CACD,CAAA;CAAA","sourcesContent":["module.exports = {\n\t\"Led\": {\n\t\tproperties: [\"id\", \"pin\", \"value\"]\n\t}\n}"]}

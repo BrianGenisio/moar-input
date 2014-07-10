@@ -15,8 +15,6 @@ var jsHintConfig = {
 
 gulp.task('js', function() {
     return gulp.src(paths.source)
-        .pipe(jshint(jsHintConfig))
-        .pipe(jshint.reporter('default'))
         .pipe(traceur({sourceMap: true}))
         .pipe(gulp.dest('dist'));
 });

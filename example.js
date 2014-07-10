@@ -1,5 +1,5 @@
 var five = require("../johnny-five");
-var MoarInput = require('./');
+var MoarInput = require('./dist/index');
 var board = new five.Board();
 
 board.on("ready", function() {

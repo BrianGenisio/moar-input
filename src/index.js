@@ -1,5 +1,6 @@
 // --symbols
 require('traceur');
+var BoardComponents = require('./board-components');
 
 var pBoard = Symbol();
 
@@ -10,6 +11,12 @@ class MoarInput {
 
 	get board() {
 		return this[pBoard];
+	}
+
+	go() {
+		var components = new BoardComponents(this.board);
+		console.log(components.getComponents());
+
 	}
 }
 
