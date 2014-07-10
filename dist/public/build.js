@@ -237,7 +237,7 @@ System.register("github:angular/bower-angular@1.2.19", ["github:angular/bower-an
   return module.exports;
 });
 
-System.register("app", ["angular"], true, function(require, exports, __moduleName) {
+System.register("app", ["angular","angular","angular","app","angular","app"], true, function(require, exports, __moduleName) {
   var global = System.global;
   var __define = global.define;
   global.define = undefined;
@@ -245,7 +245,26 @@ System.register("app", ["angular"], true, function(require, exports, __moduleNam
   var process = System.get("@@nodeProcess")["default"];
     var __filename = "app.js";
     var __dirname = ".";
+  {"version":3,"file":"app.js","sources":["app.js"],"names":[],"mappings":"AAAA;AAAI,CAAJ,EAAI,CAAA,OAAO,EAAG,CAAA,OAAO,CAAC,SAAS,CAAC,CAAC;AAC7B,CAAJ,EAAI,CAAA,SAAS,EAAG,CAAA,OAAO,OAAO,CAAC,WAAW,CAAE,GAAE,CAAC,CAAC;AAEhD,CAAA,QAAS,IAAI,EAAC,SAAC,SAAS,CAAK;AAC3B,CAAA,UAAS,MAAM,EAAE,CAAC;CACnB,EAAC,CAAC;CAAA","sourcesContent":["var angular = require('angular');\nvar MoarInput = angular.module('moarInput', []);\n\nMoarInput.run((component) => {\n  component.hello();\n});"]}
+  "use strict";
   var angular = require('angular');
+  var MoarInput = angular.module('moarInput', []);
+  MoarInput.run((function(component) {
+    component.hello();
+  }));
+  
+  //# sourceMappingURL=app.js.map
+  {"version":3,"file":"component.js","sources":["component.js"],"names":[],"mappings":"AAAA;AAAI,CAAJ,EAAI,CAAA,OAAO,EAAG,CAAA,OAAO,CAAC,SAAS,CAAC,CAAC;AAC7B,CAAJ,EAAI,CAAA,GAAG,EAAG,CAAA,OAAO,CAAC,KAAK,CAAC,CAAC;AAEzB,CAAA,QAAS,QAAQ,CAAC,WAAW,CAAE,UAAS;CACtC,OAAO,EACL,KAAK,GAAE,SAAC;YAAK,CAAA,KAAK,CAAC,OAAO,CAAC;KAAA,CAAA,CAC5B,CAAC;CACH,CAAC,CAAC;CAAA","sourcesContent":["var angular = require('angular');\nvar app = require('app');\n\nMoarInput.factory('component', function() {\n  return {\n    hello: () => alert('Hello')\n  };\n});"]}
+  "use strict";
+  var angular = require('angular');
+  var app = require('app');
+  MoarInput.factory('component', function() {
+    return {hello: (function() {
+        return alert('Hello');
+      })};
+  });
+  
+  //# sourceMappingURL=component.js.map
   global.define = __define;
   return module.exports;
 });

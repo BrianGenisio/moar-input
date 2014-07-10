@@ -22,7 +22,9 @@ System.config({
     "npm:base64-js@0.0.4": {},
     "npm:ieee754@1.1.3": {},
     "npm:Base64@0.2.1": {},
-    "angular": "github:angular/bower-angular@^1.2.19"
+    "angular": "github:angular/bower-angular@^1.2.19",
+    "angular/resource": "github:angular/bower-angular@^1.2.19",
+    "github:components/angular-resource": "github:components/angular-resource@^1.2.0"
   }
 });
 
@@ -36,7 +38,8 @@ System.config({
     "github:systemjs/plugin-json": "master",
     "npm:inherits": "2.0.1",
     "npm:Base64": "0.2.1",
-    "github:angular/bower-angular": "1.2.19"
+    "github:angular/bower-angular": "1.2.19",
+    "github:components/angular-resource": "1.2.0"
   }
 });
 
