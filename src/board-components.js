@@ -1,5 +1,6 @@
 var componentConfig = require("./component-config");
 var typeName = require("./type-name");
+var iterationExtensions = require("./iteration-extensions");
 
 function isComponent(value) {
 	return typeName(value) in componentConfig;
@@ -25,10 +26,29 @@ class BoardComponents {
 		this.board = board;
 	}
 
-	getComponents() {
+	[Symbol.iterator]() {
 		var boardContext = this.board.repl.context;
-		return [ for (name of Object.keys(boardContext)) if(isComponent(boardContext[name])) getComponent(name, boardContext[name]) ];
+
+		return iterationExtensions.arrayIterator(
+			[ for (name of Object.keys(boardContext)) 
+					if(isComponent(boardContext[name])) 
+						getComponent(name, boardContext[name]) ]
+		);
 	}
 }
 
-module.exports = BoardComponents;
+module.exports = iterationExtensions.extend(BoardComponents);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

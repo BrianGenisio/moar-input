@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getComponents_finds_known_components: function(test) {
-    var components = this.boardComponents.getComponents();
+    var components = this.boardComponents.toArray();
 
     test.equals(components.length, 1);
     test.equals(components[0].name, "myLED");
@@ -29,7 +29,7 @@ module.exports = {
   getComponents_exposes_known_properties: function(test) {
     mockBoard.repl.context.myLED.value = 1;
     mockBoard.repl.context.myLED.id = 1234;
-    var components = this.boardComponents.getComponents();
+    var components = this.boardComponents.toArray();
 
     test.equals(components[0].value, 1);
     test.equals(components[0].id, 1234);
@@ -39,7 +39,7 @@ module.exports = {
 
   getComponents_hides_unknown_properties: function(test) {
     mockBoard.repl.context.myLED.extraStuff = "extra";
-    var components = this.boardComponents.getComponents();
+    var components = this.boardComponents.toArray();
 
     test.ok(!components[0].extraStuff);
 
@@ -47,9 +47,17 @@ module.exports = {
   },
 
   defaults_id_to_name: function(test) {
-    var components = this.boardComponents.getComponents();
+    var components = this.boardComponents.toArray();
 
     test.equals(components[0].id, "myLED");
+
+    test.done();
+  },
+
+  i_can_iterate: function(test) {
+    this.boardComponents.iterate(function(component) {
+      console.log("ITERATE on ", component);
+    });
 
     test.done();
   }

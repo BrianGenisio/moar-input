@@ -11,7 +11,7 @@ var MoarInput = function MoarInput(board) {
   },
   go: function() {
     var components = new BoardComponents(this.board);
-    console.log(components.getComponents());
+    console.log(components.toArray());
   }
 }, {});
 module.exports = MoarInput;

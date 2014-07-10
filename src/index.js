@@ -15,7 +15,7 @@ class MoarInput {
 
 	go() {
 		var components = new BoardComponents(this.board);
-		console.log(components.getComponents());
+		console.log(components.toArray());
 
 	}
 }

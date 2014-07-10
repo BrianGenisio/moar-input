@@ -1,15 +1,17 @@
 "use strict";
+var $__1;
 var componentConfig = require("./component-config");
 var typeName = require("./type-name");
+var iterationExtensions = require("./iteration-extensions");
 function isComponent(value) {
   return typeName(value) in componentConfig;
 }
 function getComponent(name, value) {
   var result = {name: name};
   var properties = componentConfig[typeName(value)].properties;
-  for (var $__3 = properties[Symbol.iterator](),
-      $__4; !($__4 = $__3.next()).done; ) {
-    var property = $__4.value;
+  for (var $__4 = properties[Symbol.iterator](),
+      $__5; !($__5 = $__4.next()).done; ) {
+    var property = $__5.value;
     {
       result[property] = value[property];
     }
@@ -22,20 +24,25 @@ function getComponent(name, value) {
 var BoardComponents = function BoardComponents(board) {
   this.board = board;
 };
-($traceurRuntime.createClass)(BoardComponents, {getComponents: function() {
+($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, Symbol.iterator, {
+  value: function() {
     var boardContext = this.board.repl.context;
-    return (function() {
-      var $__1 = 0,
-          $__2 = [];
-      for (var $__3 = Object.keys(boardContext)[Symbol.iterator](),
-          $__4; !($__4 = $__3.next()).done; ) {
-        var name = $__4.value;
+    return iterationExtensions.arrayIterator((function() {
+      var $__2 = 0,
+          $__3 = [];
+      for (var $__4 = Object.keys(boardContext)[Symbol.iterator](),
+          $__5; !($__5 = $__4.next()).done; ) {
+        var name = $__5.value;
         if (isComponent(boardContext[name]))
-          $__2[$__1++] = getComponent(name, boardContext[name]);
+          $__3[$__2++] = getComponent(name, boardContext[name]);
       }
-      return $__2;
-    }());
-  }}, {});
-module.exports = BoardComponents;
+      return $__3;
+    }()));
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), $__1), {});
+module.exports = iterationExtensions.extend(BoardComponents);
 
 //# sourceMappingURL=board-components.js.map
