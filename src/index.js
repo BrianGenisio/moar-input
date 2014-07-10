@@ -3,3 +3,5 @@ class MoarInput {
 		this.board = board;
 	}
 }
+
+module.exports = MoarInput;
