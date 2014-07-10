@@ -1,0 +1,9 @@
+{
+  "registry": "jspm",
+  "main": "app",
+  "dependencies": {
+    "github:components/jquery": "^2.1.1",
+    "npm:lodash-node": "^2.4.1",
+    "angular": "^1.2.19"
+  }
+}

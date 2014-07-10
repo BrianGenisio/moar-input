@@ -10,11 +10,14 @@ class Server {
 
   configure() {
     this.app.get('/components', (request, response) => response.send(this.components.toArray()) );
+
+    this.app.use(express.static(`${__dirname }/public`));
   }
 
-  start() {
-    this.app.listen(3000);
+  start(port = 3000) {
+    console.log(`Listening on localhost:${port}`);
+    this.app.listen(port);
   }
 }
 
-module.exports = Server;
+module.exports = Server;  
