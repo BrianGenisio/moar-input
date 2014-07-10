@@ -1,12 +1,14 @@
 // --symbols
 require('traceur');
-var BoardComponents = require('./board-components');
+var Server = require('./server');
 
 var pBoard = Symbol();
+var pServer = Symbol();
 
 class MoarInput {
 	constructor(board) {
 		this[pBoard] = board;
+		this[pServer] = new Server(board);
 	}
 
 	get board() {
@@ -14,9 +16,7 @@ class MoarInput {
 	}
 
 	go() {
-		var components = new BoardComponents(this.board);
-		console.log(components.toArray());
-
+		this[pServer].start();
 	}
 }
 

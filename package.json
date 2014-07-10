@@ -15,9 +15,10 @@
     "gulp": "^3.8.5",
     "gulp-jshint": "^1.7.0",
     "gulp-nodeunit": "0.0.5",
-    "gulp-traceur": "^0.8.0",
+    "gulp-traceur": "^0.8.0"
   },
   "dependencies": {
+    "express": "^4.5.1",
     "private-name": "^0.1.0",
     "traceur": "0.0.49"
   }

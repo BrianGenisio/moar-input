@@ -1,17 +1,18 @@
 "use strict";
 require('traceur');
-var BoardComponents = require('./board-components');
+var Server = require('./server');
 var pBoard = Symbol();
+var pServer = Symbol();
 var MoarInput = function MoarInput(board) {
   this[pBoard] = board;
+  this[pServer] = new Server(board);
 };
 ($traceurRuntime.createClass)(MoarInput, {
   get board() {
     return this[pBoard];
   },
   go: function() {
-    var components = new BoardComponents(this.board);
-    console.log(components.toArray());
+    this[pServer].start();
   }
 }, {});
 module.exports = MoarInput;
