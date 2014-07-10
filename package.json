@@ -13,12 +13,14 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.8.5",
+    "gulp-angular-templatecache": "^1.2.1",
     "gulp-concat": "^2.3.3",
     "gulp-jshint": "^1.7.0",
     "gulp-nodeunit": "0.0.5",
     "gulp-traceur": "^0.8.0"
   },
   "dependencies": {
+    "body-parser": "^1.4.3",
     "express": "^4.5.1",
     "private-name": "^0.1.0",
     "traceur": "0.0.49"

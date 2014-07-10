@@ -1,4 +1,6 @@
 var express = require('express');
+var bodyParser = require('body-parser')
+
 var BoardComponents = require('./board-components');
 
 class Server {
@@ -9,7 +11,10 @@ class Server {
   }
 
   configure() {
+    this.app.use(bodyParser.json());
+
     this.app.get('/components', (request, response) => response.send(this.components.toArray()) );
+    this.app.post('/components/:id', (request, response) => response.send(this.components.update(request.body)));
 
     this.app.use(express.static(`${__dirname }/public`));
   }

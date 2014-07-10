@@ -7,7 +7,7 @@ function isComponent(value) {
 }
 
 function getComponent(name, value) {
-	var result = { name };
+	var result = { name, type: typeName(value) };
 	var properties = componentConfig[typeName(value)].properties;
 
 	for(var property of properties) {
@@ -24,6 +24,11 @@ function getComponent(name, value) {
 class BoardComponents {
 	constructor(board) {
 		this.board = board;
+	}
+
+	update(component) {
+		this.board.repl.context[component.name][component.value ? 'on' : 'off']();
+		return component;
 	}
 
 	[Symbol.iterator]() {

@@ -7,7 +7,10 @@ function isComponent(value) {
   return typeName(value) in componentConfig;
 }
 function getComponent(name, value) {
-  var result = {name: name};
+  var result = {
+    name: name,
+    type: typeName(value)
+  };
   var properties = componentConfig[typeName(value)].properties;
   for (var $__4 = properties[Symbol.iterator](),
       $__5; !($__5 = $__4.next()).done; ) {
@@ -24,7 +27,15 @@ function getComponent(name, value) {
 var BoardComponents = function BoardComponents(board) {
   this.board = board;
 };
-($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, Symbol.iterator, {
+($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, "update", {
+  value: function(component) {
+    this.board.repl.context[component.name][component.value ? 'on' : 'off']();
+    return component;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, Symbol.iterator, {
   value: function() {
     var boardContext = this.board.repl.context;
     return iterationExtensions.arrayIterator((function() {

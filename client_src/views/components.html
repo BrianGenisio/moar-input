@@ -1,0 +1,18 @@
+<div class="components list" ng-controller="ComponentsCtrl">
+	<h2>Components</h2>
+
+	<ul>
+		<li ng-repeat="component in components">
+			<span ng-switch="component.type">
+				<span ng-switch-when="Led">
+					<span led="component"></span>
+				</span>
+
+				<span ng-switch-default>
+					Unknown component: {{component}}
+				</span>
+			</span>
+		</li>
+	</ul>	
+</div>
+
