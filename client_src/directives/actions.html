@@ -1,0 +1,10 @@
+<ul>
+	<li ng-repeat="action in data.actions">
+
+		<button ng-click="act(action)">{{action.name}}({{paramsList(action.params)}})</button>
+		<span ng-repeat="param in action.params">
+			<input placeholder="{{param}}" ng-model="actionValues(action.name)[param]" />
+		</span>
+
+	</li>
+</ul>
