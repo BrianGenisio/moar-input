@@ -1,9 +1,13 @@
 "use strict";
-var angular = require('angular');
-var angularResource = require('github:components/angular-resource');
 var MoarInput = angular.module('moarInput', ['ngResource']);
 MoarInput.controller('ComponentsCtrl', (function($scope, Component) {
   $scope.components = Component.query();
+}));
+MoarInput.factory('Component', (function($resource) {
+  return $resource('/components/:id/:action', {
+    id: '@id',
+    action: '@action'
+  });
 }));
 MoarInput.directive('actions', (function() {
   return {
@@ -37,12 +41,6 @@ MoarInput.directive('piezo', (function() {
     scope: {data: '=piezo'},
     controller: (function($scope) {})
   };
-}));
-MoarInput.factory('Component', (function($resource) {
-  return $resource('/components/:id/:action', {
-    id: '@id',
-    action: '@action'
-  });
 }));
 angular.module("moarInput").run(["$templateCache", function($templateCache) {
   $templateCache.put("directives/actions.html", "<ul>\n	<li ng-repeat=\"action in data.actions\">\n\n		<button ng-click=\"act(action)\">{{action.name}}({{paramsList(action.params)}})</button>\n		<span ng-repeat=\"param in action.params\">\n			<input placeholder=\"{{param}}\" ng-model=\"actionValues(action.name)[param]\" />\n		</span>\n\n	</li>\n</ul>");
