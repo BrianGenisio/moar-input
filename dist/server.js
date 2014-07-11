@@ -14,8 +14,8 @@ var Server = function Server(board) {
     this.app.get('/components', (function(request, response) {
       return response.send($__0.components.toArray());
     }));
-    this.app.post('/components/:id', (function(request, response) {
-      return response.send($__0.components.update(request.body));
+    this.app.post('/components/:id/:action', (function(request, response) {
+      response.send($__0.components.act(request.params.action, request.body));
     }));
     this.app.use(express.static((__dirname + "/public")));
   },

@@ -6,6 +6,21 @@ var iterationExtensions = require("./iteration-extensions");
 function isComponent(value) {
   return typeName(value) in componentConfig;
 }
+var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+var ARGUMENT_NAMES = /([^\s,]+)/g;
+function getParamNames(func) {
+  var fnStr = func.toString().replace(STRIP_COMMENTS, '');
+  var result = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
+  if (result === null)
+    result = [];
+  return result;
+}
+function getAction(name, value) {
+  return {
+    name: name,
+    params: getParamNames(value[name])
+  };
+}
 function getComponent(name, value) {
   var result = {
     name: name,
@@ -22,15 +37,25 @@ function getComponent(name, value) {
   if (!result.id) {
     result.id = name;
   }
+  result.actions = (function() {
+    var $__2 = 0,
+        $__3 = [];
+    for (var $__6 = Object.keys(Object.getPrototypeOf(value))[Symbol.iterator](),
+        $__7; !($__7 = $__6.next()).done; ) {
+      var name = $__7.value;
+      $__3[$__2++] = getAction(name, value);
+    }
+    return $__3;
+  }());
   return result;
 }
 var BoardComponents = function BoardComponents(board) {
   this.board = board;
 };
-($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, "update", {
-  value: function(component) {
-    this.board.repl.context[component.name][component.value ? 'on' : 'off']();
-    return component;
+($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, "act", {
+  value: function(action, component) {
+    this.board.repl.context[component.name][action]();
+    return getComponent(component.name, this.board.repl.context[component.name]);
   },
   configurable: true,
   enumerable: true,

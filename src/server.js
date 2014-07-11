@@ -14,7 +14,9 @@ class Server {
     this.app.use(bodyParser.json());
 
     this.app.get('/components', (request, response) => response.send(this.components.toArray()) );
-    this.app.post('/components/:id', (request, response) => response.send(this.components.update(request.body)));
+    this.app.post('/components/:id/:action', (request, response) => {
+      response.send(this.components.act(request.params.action, request.body));
+    });
 
     this.app.use(express.static(`${__dirname }/public`));
   }

@@ -1,1 +1,1 @@
-MoarInput.factory('Component', $resource => $resource('/components/:id', {id: '@id'}));
+MoarInput.factory('Component', $resource => $resource('/components/:id/:action', {id: '@id', action: '@action'}));

@@ -6,6 +6,21 @@ function isComponent(value) {
 	return typeName(value) in componentConfig;
 }
 
+var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+var ARGUMENT_NAMES = /([^\s,]+)/g;
+
+function getParamNames(func) {
+  var fnStr = func.toString().replace(STRIP_COMMENTS, '')
+  var result = fnStr.slice(fnStr.indexOf('(')+1, fnStr.indexOf(')')).match(ARGUMENT_NAMES)
+  if(result === null)
+     result = []
+  return result
+}
+
+function getAction(name, value) {
+	return { name, params: getParamNames(value[name]) };
+}
+
 function getComponent(name, value) {
 	var result = { name, type: typeName(value) };
 	var properties = componentConfig[typeName(value)].properties;
@@ -18,6 +33,8 @@ function getComponent(name, value) {
 		result.id = name;
 	}
 
+	result.actions = [ for (name of Object.keys(Object.getPrototypeOf(value))) getAction(name, value) ];
+
 	return result;
 }
 
@@ -26,9 +43,9 @@ class BoardComponents {
 		this.board = board;
 	}
 
-	update(component) {
-		this.board.repl.context[component.name][component.value ? 'on' : 'off']();
-		return component;
+	act(action, component) {
+		this.board.repl.context[component.name][action]();
+		return getComponent(component.name, this.board.repl.context[component.name]);
 	}
 
 	[Symbol.iterator]() {
