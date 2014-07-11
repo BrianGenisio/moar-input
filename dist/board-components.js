@@ -52,9 +52,28 @@ function getComponent(name, value) {
 var BoardComponents = function BoardComponents(board) {
   this.board = board;
 };
-($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, "act", {
+($traceurRuntime.createClass)(BoardComponents, ($__1 = {}, Object.defineProperty($__1, "context", {
+  get: function() {
+    return this.board.repl.context;
+  },
+  configurable: true,
+  enumerable: true
+}), Object.defineProperty($__1, "act", {
   value: function(action, component) {
-    this.board.repl.context[component.name][action]();
+    var j5Component = this.context[component.name];
+    var actionFunction = j5Component[action];
+    var paramNames = getParamNames(actionFunction);
+    var parameters = (function() {
+      var $__2 = 0,
+          $__3 = [];
+      for (var $__4 = paramNames[Symbol.iterator](),
+          $__5; !($__5 = $__4.next()).done; ) {
+        var name = $__5.value;
+        $__3[$__2++] = component.params[name];
+      }
+      return $__3;
+    }());
+    actionFunction.apply(j5Component, parameters);
     return getComponent(component.name, this.board.repl.context[component.name]);
   },
   configurable: true,

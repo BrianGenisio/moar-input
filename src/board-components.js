@@ -43,8 +43,19 @@ class BoardComponents {
 		this.board = board;
 	}
 
+	get context() {
+		return this.board.repl.context;
+	}
+
 	act(action, component) {
-		this.board.repl.context[component.name][action]();
+		var j5Component = this.context[component.name];
+		var actionFunction = j5Component[action];
+		var paramNames = getParamNames(actionFunction);
+
+		var parameters = [ for(name of paramNames) component.params[name] ]
+
+		actionFunction.apply(j5Component, parameters);
+
 		return getComponent(component.name, this.board.repl.context[component.name]);
 	}
 
