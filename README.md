@@ -7,6 +7,9 @@ This is really just a proof of concept at this time.  It supports Led and Piezo 
 server and `go()`.  You can see your hardware and interact with it at http://localhost:3000.  This will be more 
 configurable in the future.
 
+Here is a [screencast I put together](http://youtu.be/staaa9aFEUs) to better understand what it does:
+
+
 ```
 var five = require("johnny-five");
 var MoarInput = require('../moar-input');
